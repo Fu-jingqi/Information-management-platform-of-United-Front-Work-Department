@@ -6,19 +6,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
 
     private static final String driver = "com.mysql.jdbc.Driver";// 数据库驱动
-    private static final String url = "jdbc:mysql://localhost:3306/book?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT";   //"login"是指你的数据库名称 3306是端口
+    private static final String url = "jdbc:mysql://localhost:3306/empinfor?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT";   //"login"是指你的数据库名称 3306是端口
     private static final String username = "root";         //  数据库用户名
     private static final String password = "fjq72110902";         //  数据库密码
-    private static java.sql.Connection conn = null;                 //  连接对象
+//    private static java.sql.Connection conn = null;                 //  连接对象
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -28,12 +25,13 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("utf-8");
         String name = req.getParameter("username") ;
         String pwd = req.getParameter("password");
         resp.getWriter().write(name + " " + pwd) ;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver") ;
-            conn = DriverManager.getConnection(url, username, password);
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection conn = DriverManager.getConnection(url, username, password);
             String sql = "SELECT * FROM person where pname = ? and pwd = ?" ;
             PreparedStatement prd = conn.prepareStatement(sql) ;
             prd.setString(1,name);
@@ -45,9 +43,9 @@ public class LoginServlet extends HttpServlet {
                 flag = true ;
             }
             if(flag) {
-                resp.getWriter().write("登录成功");
+                System.out.println("登录成功");
             }else{
-                resp.getWriter().write("登录失败");
+                System.out.println("登录失败");
             }
 
         } catch (ClassNotFoundException | SQLException e) {

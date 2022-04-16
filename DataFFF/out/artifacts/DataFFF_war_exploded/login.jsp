@@ -140,8 +140,7 @@
         <div class="login_message">
             <div id="login_message">提示信息</div>
         </div>
-<%--        <form action="/LoginServlet" method="post">--%>
-        <form action="ConfirmInfor.jsp" method="post">
+        <form action="/LoginServlet" method="post">
             <div class="login_user">
                 <img src="./images/user.png">
                 <input id="user" name="username" type="text" placeholder="请输入用户名">
