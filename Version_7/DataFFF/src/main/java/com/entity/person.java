@@ -66,7 +66,6 @@ public class person {
     }
 
     public person(String pname,int page,Date pbirth,String pwd){
-//        this.pid = pid ;
         this.pname = pname ;
         this.pbirth = pbirth ;
         this.pwd = pwd ;

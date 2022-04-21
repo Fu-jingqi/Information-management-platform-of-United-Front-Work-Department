@@ -1,7 +1,10 @@
 package com.servlet;
 
+import com.entity.PersonInfor;
 import com.entity.person;
+import com.service.PersonInforService;
 import com.service.PersonService;
+import com.service.impl.PersonInforServiceImpl;
 import com.service.impl.PersonServiceImpl;
 
 import java.sql.Date;
@@ -11,7 +14,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-//import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
@@ -29,8 +31,8 @@ public class DoUpdateOrAddPersonServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         // 1. pid
         String strPid = req.getParameter("pid");
-        // 2. page
-        int page = Integer.parseInt(req.getParameter("page" ));
+        // 2. psex
+        String psex = req.getParameter("psex" );
         // 3. pname
         String pname = req.getParameter("pname") ;
         // 4. pbirth
@@ -42,16 +44,61 @@ public class DoUpdateOrAddPersonServlet extends HttpServlet {
         }catch (ParseException e){
             e.printStackTrace();
         }
-        String pwd = req.getParameter("pwd") ;
+        // 5. pnational
+        String pnational = req.getParameter("pnational");
+        // 6. pnativeplace
+        String pnativeplace = req.getParameter("pnativeplace") ;
 
-        PersonService ps = new PersonServiceImpl() ;
-        if(strPid != null && !(strPid.equals(""))){
+        String ppoliticalstatus = req.getParameter("ppoliticalstatus") ;
+
+        String pworkplace = req.getParameter("pworkplace") ;
+
+        String pzhicheng = req.getParameter("pzhicheng");
+
+        String pxueli = req.getParameter("pxueli") ;
+
+        String pcurrentposition = req.getParameter("pcurrentposition") ;
+
+        String psocialwork = req.getParameter("psocialwork") ;
+
+        String strworktime = req.getParameter("pjoinworktime") ;
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd") ;
+        Date pjoinworktime = null;
+        try{
+            pjoinworktime = new Date(sdf1.parse(strworktime).getTime()) ;
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        String strpartytime = req.getParameter("pjoinworktime") ;
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd") ;
+        Date pjoinpartytime = null;
+        try{
+            pjoinpartytime = new Date(sdf2.parse(strpartytime).getTime()) ;
+        }catch (ParseException e){
+            e.printStackTrace();
+        }
+
+        String phonor = req.getParameter("phonor") ;
+
+        String ptraining = req.getParameter("ptraining") ;
+
+        String pcanzhengyizheng = req.getParameter("pcanzhengyizheng") ;
+
+        String pcontactnum = req.getParameter("pcontactnum") ;
+
+        String pinfor = req.getParameter("pinfor") ;
+        if(pname == null || psex == null || pbir == null || pnational == null || pnativeplace == null || ppoliticalstatus == null || pworkplace == null || pzhicheng == null || pxueli == null || pcurrentposition == null || psocialwork == null || pjoinpartytime == null || pjoinworktime == null || phonor == null || ptraining == null || pcanzhengyizheng == null || pcontactnum == null || pinfor == null ){
+            resp.sendRedirect("modify.jsp");
+        }
+        PersonInforService ps = new PersonInforServiceImpl() ;
+        if( strPid != null && !(strPid.equals("")) ){
             int pid = Integer.parseInt(strPid) ;
-            if(ps.UpdatePersonById(new person(pid,pname,page,pbir,pwd))==1) {
+            if(ps.UpdatePersonById(new PersonInfor(pid,pname,psex,pbir,pnational,pnativeplace,ppoliticalstatus,pworkplace,pzhicheng,pxueli,pcurrentposition,psocialwork,pjoinworktime,pjoinpartytime,phonor,ptraining,pcanzhengyizheng,pcontactnum,pinfor))==1) {
                 resp.sendRedirect("/GetAllPersonServlet");
             }
         }else{
-            if(ps.AddPerson(new person(pname,page,pbir,pwd)) == 1){
+            if(ps.AddPerson(new PersonInfor(pname,psex,pbir,pnational,pnativeplace,ppoliticalstatus,pworkplace,pzhicheng,pxueli,pcurrentposition,psocialwork,pjoinworktime,pjoinpartytime,phonor,ptraining,pcanzhengyizheng,pcontactnum,pinfor)) == 1){
                 resp.sendRedirect("/GetAllPersonServlet");
             }
         }

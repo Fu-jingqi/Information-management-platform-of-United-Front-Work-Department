@@ -1,7 +1,11 @@
 package com.servlet;
 
+import com.entity.PersonInfor;
+import com.service.PersonInforService;
 import com.service.PersonService;
+import com.service.impl.PersonInforServiceImpl;
 import com.service.impl.PersonServiceImpl;
+import com.util.ConnUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,6 +13,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
 @WebServlet("/DeletePersonByIdServlet")
 public class DeletePersonByIdServlet extends HttpServlet {
     @Override
@@ -21,9 +29,17 @@ public class DeletePersonByIdServlet extends HttpServlet {
         if(strPid!=null){
             pid=Integer.parseInt(strPid) ;
         }
-        PersonService ps = new PersonServiceImpl() ;
+        PersonInforService ps = new PersonInforServiceImpl() ;
         if(ps.delPersonById(pid) == 1){
-//            req.getRequestDispatcher("/show.jsp").forward(req,resp);
+            String sss = "ALTER TABLE workpersoninfor AUTO_INCREMENT = 1" ;
+            Connection conn = ConnUtil.getConn() ;
+            try {
+                Statement stat = conn.createStatement() ;
+                stat.execute(sss) ;
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
             resp.sendRedirect("/GetAllPersonServlet");
         }else{
             req.getRequestDispatcher("/error.jsp").forward(req,resp);

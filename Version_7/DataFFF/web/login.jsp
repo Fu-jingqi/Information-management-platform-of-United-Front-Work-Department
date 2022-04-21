@@ -17,7 +17,8 @@
     <base href="<%=basePath%>">
     <title>统战部数据管理系统</title>
     <link rel="icon" href="images/loginIcon.png">
-    <%--    <link rel="stylesheet" href="./login.css">--%>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-p1KAotb3W9ndluCsqePPYnjRm3c6abdnIjo0tQwYUv83VsbsYd43RuofnFAaDo0E" crossorigin="anonymous">
+
     <style>
         *{
             margin: 0;
@@ -144,7 +145,6 @@
             <div class="login_user">
                 <img src="./images/user.png">
                 <input id="user" name="pname" type="text" placeholder="请输入用户名">
-                <%--            <input type="text" name="username" class="form-style" placeholder="请输入用户名" id="username" autocomplete="off">&ndash;%&gt;--%>
             </div>
             <div class="login_pwd login_user">
                 <img src="./images/pwd.png">

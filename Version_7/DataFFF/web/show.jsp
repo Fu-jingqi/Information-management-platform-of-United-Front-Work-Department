@@ -13,6 +13,10 @@
 %>
 <html>
 <head>
+    <%--    <script type="text/javascript" src="js/jquery-3.4.1.js" ></script>--%>
+    <script type="text/javascript" src="js/jquery-3.4.1.min.js" ></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.css">
     <title>Title</title>
 
 </head>
@@ -21,6 +25,7 @@
     function gotoReg(){
         location.href = "/modify.jsp"
     }
+
 </script>
 
 <center>
@@ -32,28 +37,70 @@
     <div style="height: 50px">
         欢迎你${pname}
     </div>
-    <div><input type="button" value="注册" onclick="gotoReg()"></div>
+    <div>
+        <%--        <input type="button" value="注册" onclick="gotoReg()">--%>
+        <button type="button" class="btn btn-default navbar-btn" onclick="gotoReg()">添加</button>
+    </div>
     <hr/>
-    <table>
-        <tr>
-            <td>人员编号</td>
-            <td>人员姓名</td>
-            <td>年龄</td>
-            <td>生日</td>
-            <td>密码</td>
-        </tr>
-        <c:forEach items="${personList}" var = "person">
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">信息详情</div>
+        <%--        <div class="panel-body">--%>
+        <%--            <p>...</p>--%>
+        <%--        </div>--%>
+
+        <!-- Table -->
+        <table class="table">
             <tr>
-                <td>${person.pid}</td>
-                <td>${person.pname}</td>
-                <td>${person.page}</td>
-                <td>${person.pbirth}</td>
-                <td>${person.pwd}</td>
-                <td><a href="<%=path%>/undatePersonServlet?pid=${person.pid}">修改</a></td>
-                <td><a href="<%=path%>/DeletePersonByIdServlet?pid=${person.pid}" onclick="if(confirm('是否确定删除？')===false)return false">删除</a></td>
+                <td>人员编号</td>
+                <td>人员姓名</td>
+                <td>性别</td>
+                <td>出生年月日</td>
+                <td>民族</td>
+                <td>籍贯</td>
+                <td>政治面貌</td>
+                <td>工作单位</td>
+                <td>职称</td>
+                <td>学历</td>
+                <td>现任职务</td>
+                <td>社会职务</td>
+                <td>参加工作时间</td>
+                <td>加入党派时间</td>
+                <td>获得荣誉</td>
+                <td>培训情况</td>
+                <td>参政议政情况</td>
+                <td>联系方式</td>
+                <td>备注</td>
             </tr>
-        </c:forEach>
-    </table>
+            <c:forEach items="${personList}" var = "person">
+                <tr>
+                    <td>${person.pid}</td>
+                    <td>${person.pname}</td>
+                    <td>${person.psex}</td>
+                    <td>${person.pbirth}</td>
+                    <td>${person.pnational}</td>
+                    <td>${person.pnativeplace}</td>
+                    <td>${person.ppoliticalstatus}</td>
+                    <td>${person.pworkplace}</td>
+                    <td>${person.pzhicheng}</td>
+                    <td>${person.pxueli}</td>
+                    <td>${person.pcurrentposition}</td>
+                    <td>${person.psocialwork}</td>
+                    <td>${person.pjoinworktime}</td>
+                    <td>${person.pjoinpartytime}</td>
+                    <td>${person.phonor}</td>
+                    <td>${person.ptraining}</td>
+                    <td>${person.pcanzhengyizheng}</td>
+                    <td>${person.pcontactnum}</td>
+                    <td>${person.pinfor}</td>
+                        <%--                        <td></td>--%>
+                    <td><a href="<%=path%>/undatePersonServlet?pid=${person.pid}">修改</a></td>
+                    <td><a href="<%=path%>/DeletePersonByIdServlet?pid=${person.pid}" onclick="if(confirm('是否确定删除？')===false)return false">删除</a></td>
+                </tr>
+            </c:forEach>
+        </table>
+    </div>
     </body>
 </center>
 </html>

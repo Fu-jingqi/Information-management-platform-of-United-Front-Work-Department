@@ -1,7 +1,10 @@
 package com.servlet;
 
+import com.entity.PersonInfor;
 import com.entity.person;
+import com.service.PersonInforService;
 import com.service.PersonService;
+import com.service.impl.PersonInforServiceImpl;
 import com.service.impl.PersonServiceImpl;
 
 import javax.servlet.ServletException;
@@ -20,10 +23,9 @@ public class GetAllPersonServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        PersonService ps = new PersonServiceImpl() ;
-        List<person> list = ps.getAllPerson() ;
-        req.setAttribute("personList",list);
+        PersonInforService ps1 = new PersonInforServiceImpl() ;
+        List<PersonInfor> list1 = ps1.getAllPerson() ;
+        req.setAttribute("personList",list1);
         req.getRequestDispatcher("/show.jsp").forward(req,resp);
-
     }
 }

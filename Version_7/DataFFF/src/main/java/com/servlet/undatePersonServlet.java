@@ -1,7 +1,10 @@
 package com.servlet;
 
+import com.entity.PersonInfor;
 import com.entity.person;
+import com.service.PersonInforService;
 import com.service.PersonService;
+import com.service.impl.PersonInforServiceImpl;
 import com.service.impl.PersonServiceImpl;
 
 import javax.servlet.ServletException;
@@ -22,8 +25,8 @@ public class undatePersonServlet extends HttpServlet {
         if(strPid != null){
             pid = Integer.parseInt(strPid) ;
         }
-        PersonService ps = new PersonServiceImpl() ;
-        person p = ps.getPersonById(pid) ;
+        PersonInforService ps = new PersonInforServiceImpl() ;
+        PersonInfor p = ps.getPersonById(pid) ;
 
         req.setAttribute("person",p);
         req.getRequestDispatcher("/modify.jsp").forward(req,resp); ;
