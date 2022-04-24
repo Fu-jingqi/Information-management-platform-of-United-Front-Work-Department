@@ -41,6 +41,7 @@ public class DoUpdateOrAddPersonServlet extends HttpServlet {
         Date pbir = null;
         try{
             pbir = new Date(sdf.parse(strBir).getTime()) ;
+            System.out.println(pbir);
         }catch (ParseException e){
             e.printStackTrace();
         }
@@ -61,40 +62,43 @@ public class DoUpdateOrAddPersonServlet extends HttpServlet {
 
         String pcurrentposition = req.getParameter("pcurrentposition") ;
 
-        String TenureOfTheSameRank   = req.getParameter("pTenureOfTheSameRank  ") ;
-        SimpleDateFormat sdf4 = new SimpleDateFormat("yyyy-MM-dd") ;
-        Date pTenureOfTheSameRank   = null;
+        String strTenureOfTheSameRank = req.getParameter("pTenureOfTheSameRank") ;
+        System.out.println(strTenureOfTheSameRank);
+        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd") ;
+        Date pTenureOfTheSameRank = null;
+
         try{
-            pTenureOfTheSameRank   = new Date(sdf4.parse(TenureOfTheSameRank  ).getTime()) ;
+            pTenureOfTheSameRank = new Date(sdf1.parse(strTenureOfTheSameRank).getTime()) ;
+            System.out.println(pTenureOfTheSameRank);
         }catch (ParseException e){
             e.printStackTrace();
         }
 
-        String LengthOfTenure  = req.getParameter("pLengthOfTenure ") ;
-        SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd") ;
+        String LengthOfTenure  = req.getParameter("pLengthOfTenure") ;
+        System.out.println(LengthOfTenure);
+        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd") ;
         Date pLengthOfTenure  = null;
         try{
-            pLengthOfTenure  = new Date(sdf3.parse(LengthOfTenure ).getTime()) ;
+            pLengthOfTenure  = new Date(sdf2.parse(LengthOfTenure).getTime()) ;
         }catch (ParseException e){
             e.printStackTrace();
         }
-
         String psocialwork = req.getParameter("psocialwork") ;
 
         String strworktime = req.getParameter("pjoinworktime") ;
-        SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd") ;
+        SimpleDateFormat sdf3 = new SimpleDateFormat("yyyy-MM-dd") ;
         Date pjoinworktime = null;
         try{
-            pjoinworktime = new Date(sdf1.parse(strworktime).getTime()) ;
+            pjoinworktime = new Date(sdf3.parse(strworktime).getTime()) ;
         }catch (ParseException e){
             e.printStackTrace();
         }
 
         String strpartytime = req.getParameter("pjoinpartytime") ;
-        SimpleDateFormat sdf2 = new SimpleDateFormat("yyyy-MM-dd") ;
+        SimpleDateFormat sdf4 = new SimpleDateFormat("yyyy-MM-dd") ;
         Date pjoinpartytime = null;
         try{
-            pjoinpartytime = new Date(sdf2.parse(strpartytime).getTime()) ;
+            pjoinpartytime = new Date(sdf4.parse(strpartytime).getTime()) ;
         }catch (ParseException e){
             e.printStackTrace();
         }
